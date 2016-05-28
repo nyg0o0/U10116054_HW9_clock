@@ -7,6 +7,7 @@ import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.scene.control.*;
 import javafx.event.ActionEvent;
+
 public class ClockPane extends Pane {
 	private int hour;
 	private int minute;
@@ -72,7 +73,7 @@ public class ClockPane extends Pane {
     
 		paintClock(); // Repaint the clock
 	}
-  
+
 	/** Paint the clock */
 	private void paintClock() {
 		// Initialize clock parameters
@@ -81,9 +82,40 @@ public class ClockPane extends Pane {
 		double centerY = getHeight() / 2 - 50;
 		double currentY = 0.0;
 		
+
+		// Label for time counter
+		Label timeLabel = new Label("       " + hour + " \" " + minute + " \" " + second);
+		timeLabel.setLayoutX( centerX / 2 );
+		timeLabel.setLayoutY( currentY = centerX + 130 );
+
+		// Draw buttons
+		Button btnSetAlarm = new Button();
+		btnSetAlarm.setText("Timing Begin");
+		btnSetAlarm.setLayoutX( centerX / 2 );
+		btnSetAlarm.setLayoutY( currentY = currentY + 30 );
+		btnSetAlarm.setStyle("-fx-font: 16 arial; -fx-base: #b6e7c9;");
+		btnSetAlarm.setPrefWidth( centerX );
+		
+		Button btnClearAlarm = new Button();
+		btnClearAlarm.setText("Timing End");
+		btnClearAlarm.setLayoutX( centerX / 2 );
+		btnClearAlarm.setLayoutY( currentY = currentY + 40 );
+		btnClearAlarm.setStyle("-fx-font: 16 arial; -fx-base: #FF8888;");
+		btnClearAlarm.setPrefWidth( centerX );
+		
+		btnSetAlarm.setOnAction((ActionEvent event) -> {
+			hourStart = getHour();
+			
+		});	
+		
 		// Draw circle
 		Circle circle = new Circle(centerX, centerY, clockRadius);
-		circle.setFill(Color.WHITE);
+		if( hour < 5 || hour > 18 ){
+			circle.setFill(Color.LIGHTSTEELBLUE);
+		}
+		else{
+			circle.setFill(Color.LIGHTYELLOW);
+		}
 		circle.setStroke(Color.BLACK);
 		Text t1 = new Text(centerX - 5, centerY - clockRadius + 12, "12");
 		Text t2 = new Text(centerX - clockRadius + 3, centerY + 5, "9");
@@ -111,7 +143,8 @@ public class ClockPane extends Pane {
 		Line hLine = new Line(centerX, centerY, hourX, hourY);
 		hLine.setStroke(Color.GREEN);
 		getChildren().clear();  
-		getChildren().addAll(circle, t1, t2, t3, t4, sLine, mLine, hLine);
+		getChildren().addAll(timeLabel,btnSetAlarm,btnClearAlarm,circle, t1, t2, t3, t4, sLine, mLine, hLine);
+		//setStyle("-fx-background-color: black;");
 	}
   
 	@Override
