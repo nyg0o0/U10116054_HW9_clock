@@ -5,7 +5,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
-
+import javafx.scene.control.Button;
 public class ClockPane extends Pane {
 	private int hour;
 	private int minute;
@@ -75,7 +75,19 @@ public class ClockPane extends Pane {
 		double clockRadius = Math.min(getWidth(), getHeight()) * 0.8 * 0.5;
 		double centerX = getWidth() / 2;
 		double centerY = getHeight() / 2 - 30;
-
+		
+		// Draw buttons
+		Button btnSetAlarm = new Button();
+		Button btnClearAlarm = new Button();
+		btnSetAlarm.setText(" Set  ");
+		btnSetAlarm.setLayoutX( getWidth() / 3 * 2 );
+		btnSetAlarm.setLayoutY( getHeight() / 2 + 120 );
+		btnClearAlarm.setText("Clear");
+		btnClearAlarm.setLayoutX( getWidth() / 3 * 2 );
+		btnClearAlarm.setLayoutY( getHeight() / 2 + 160 );
+		btnSetAlarm.setStyle("-fx-font: 16 arial; -fx-base: #b6e7c9;");
+		btnClearAlarm.setStyle("-fx-font: 16 arial; -fx-base: #FF8888;");
+		
 		// Draw circle
 		Circle circle = new Circle(centerX, centerY, clockRadius);
 		circle.setFill(Color.WHITE);
@@ -107,7 +119,7 @@ public class ClockPane extends Pane {
 		hLine.setStroke(Color.GREEN);
     
 		getChildren().clear();  
-		getChildren().addAll(circle, t1, t2, t3, t4, sLine, mLine, hLine);
+		getChildren().addAll(btnSetAlarm,btnClearAlarm,circle, t1, t2, t3, t4, sLine, mLine, hLine);
 	}
   
 	@Override
