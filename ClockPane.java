@@ -75,21 +75,25 @@ public class ClockPane extends Pane {
 		double clockRadius = Math.min(getWidth(), getHeight()) * 0.8 * 0.5;
 		double centerX = getWidth() / 2;
 		double centerY = getHeight() / 2 - 50;
+		double currentY = 0.0;
 		
 		// Label for time counter
-		Label timingLabel = new Label("00\"00\"00");
+		Label timingLabel = new Label("      00 \" 00 \" 00");
+		timingLabel.setLayoutX( centerX / 2 );
+		timingLabel.setLayoutY( currentY = centerX + 130 );
+
 		// Draw buttons
 		Button btnSetAlarm = new Button();
 		btnSetAlarm.setText("Timing Begin");
 		btnSetAlarm.setLayoutX( centerX / 2 );
-		btnSetAlarm.setLayoutY( centerY + 150 );
+		btnSetAlarm.setLayoutY( currentY = currentY + 30 );
 		btnSetAlarm.setStyle("-fx-font: 16 arial; -fx-base: #b6e7c9;");
 		btnSetAlarm.setPrefWidth( centerX );
 		
 		Button btnClearAlarm = new Button();
 		btnClearAlarm.setText("Timing End");
 		btnClearAlarm.setLayoutX( centerX / 2 );
-		btnClearAlarm.setLayoutY( centerY + 190 );
+		btnClearAlarm.setLayoutY( currentY = currentY + 40 );
 		btnClearAlarm.setStyle("-fx-font: 16 arial; -fx-base: #FF8888;");
 		btnClearAlarm.setPrefWidth( centerX );
 		
