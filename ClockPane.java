@@ -12,7 +12,8 @@ public class ClockPane extends Pane {
 	private int hour;
 	private int minute;
 	private int second;
-  
+	private boolean time = false;
+	private long timeStart;
 	private int hourStart;
 	private int minuteStart;
 	private int secondStart;
@@ -79,36 +80,32 @@ public class ClockPane extends Pane {
 		// Initialize clock parameters
 		double clockRadius = Math.min(getWidth(), getHeight()) * 0.8 * 0.5;
 		double centerX = getWidth() / 2;
-		double centerY = getHeight() / 2 - 50;
-		double currentY = 0.0;
-		
+		double centerY = getHeight() / 2 - 10 ;
 
-		// Label for time counter
-		Label timeLabel = new Label("       " + hour + " \" " + minute + " \" " + second);
-		timeLabel.setLayoutX( centerX / 2 );
-		timeLabel.setLayoutY( currentY = centerX + 130 );
-
+		/*
+		double centerY = getHeight() / 2 -50;
 		// Draw buttons
 		Button btnSetAlarm = new Button();
 		btnSetAlarm.setText("Timing Begin");
 		btnSetAlarm.setLayoutX( centerX / 2 );
-		btnSetAlarm.setLayoutY( currentY = currentY + 30 );
+		btnSetAlarm.setLayoutY( getHeight() - 90 );
 		btnSetAlarm.setStyle("-fx-font: 16 arial; -fx-base: #b6e7c9;");
 		btnSetAlarm.setPrefWidth( centerX );
 		
 		Button btnClearAlarm = new Button();
 		btnClearAlarm.setText("Timing End");
 		btnClearAlarm.setLayoutX( centerX / 2 );
-		btnClearAlarm.setLayoutY( currentY = currentY + 40 );
+		btnClearAlarm.setLayoutY( getHeight() - 50 );
 		btnClearAlarm.setStyle("-fx-font: 16 arial; -fx-base: #FF8888;");
 		btnClearAlarm.setPrefWidth( centerX );
+		*/
 		
-		btnSetAlarm.setOnAction((ActionEvent event) -> {
-			hourStart = getHour();
-			
-		});	
+		// create a label to display the current times
+		Label timeLabel = new Label("       " + hour + " \" " + minute + " \" " + second);
+		timeLabel.setLayoutX( centerX / 2 );
+		timeLabel.setLayoutY( getHeight() - 30);
 		
-		// Draw circle
+		// if it is morning, clock will be yellow.Else if it will be blue.
 		Circle circle = new Circle(centerX, centerY, clockRadius);
 		if( hour < 5 || hour > 18 ){
 			circle.setFill(Color.LIGHTSTEELBLUE);
@@ -143,7 +140,7 @@ public class ClockPane extends Pane {
 		Line hLine = new Line(centerX, centerY, hourX, hourY);
 		hLine.setStroke(Color.GREEN);
 		getChildren().clear();  
-		getChildren().addAll(timeLabel,btnSetAlarm,btnClearAlarm,circle, t1, t2, t3, t4, sLine, mLine, hLine);
+		getChildren().addAll(timeLabel,circle, t1, t2, t3, t4, sLine, mLine, hLine);
 		//setStyle("-fx-background-color: black;");
 	}
   
