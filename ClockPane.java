@@ -5,7 +5,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 public class ClockPane extends Pane {
 	private int hour;
 	private int minute;
@@ -74,19 +74,24 @@ public class ClockPane extends Pane {
 		// Initialize clock parameters
 		double clockRadius = Math.min(getWidth(), getHeight()) * 0.8 * 0.5;
 		double centerX = getWidth() / 2;
-		double centerY = getHeight() / 2 - 30;
+		double centerY = getHeight() / 2 - 50;
 		
+		// Label for time counter
+		Label timingLabel = new Label("00\"00\"00");
 		// Draw buttons
 		Button btnSetAlarm = new Button();
-		Button btnClearAlarm = new Button();
-		btnSetAlarm.setText(" Set  ");
-		btnSetAlarm.setLayoutX( getWidth() / 3 * 2 );
-		btnSetAlarm.setLayoutY( getHeight() / 2 + 120 );
-		btnClearAlarm.setText("Clear");
-		btnClearAlarm.setLayoutX( getWidth() / 3 * 2 );
-		btnClearAlarm.setLayoutY( getHeight() / 2 + 160 );
+		btnSetAlarm.setText("Timing Begin");
+		btnSetAlarm.setLayoutX( centerX / 2 );
+		btnSetAlarm.setLayoutY( centerY + 150 );
 		btnSetAlarm.setStyle("-fx-font: 16 arial; -fx-base: #b6e7c9;");
+		btnSetAlarm.setPrefWidth( centerX );
+		
+		Button btnClearAlarm = new Button();
+		btnClearAlarm.setText("Timing End");
+		btnClearAlarm.setLayoutX( centerX / 2 );
+		btnClearAlarm.setLayoutY( centerY + 190 );
 		btnClearAlarm.setStyle("-fx-font: 16 arial; -fx-base: #FF8888;");
+		btnClearAlarm.setPrefWidth( centerX );
 		
 		// Draw circle
 		Circle circle = new Circle(centerX, centerY, clockRadius);
@@ -117,9 +122,8 @@ public class ClockPane extends Pane {
 		double hourY = centerY - hLength * Math.cos((hour % 12 + minute / 60.0) * (2 * Math.PI / 12));
 		Line hLine = new Line(centerX, centerY, hourX, hourY);
 		hLine.setStroke(Color.GREEN);
-    
 		getChildren().clear();  
-		getChildren().addAll(btnSetAlarm,btnClearAlarm,circle, t1, t2, t3, t4, sLine, mLine, hLine);
+		getChildren().addAll(timingLabel,btnSetAlarm,btnClearAlarm,circle, t1, t2, t3, t4, sLine, mLine, hLine);
 	}
   
 	@Override
