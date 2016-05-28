@@ -6,11 +6,15 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.scene.control.*;
+import javafx.event.ActionEvent;
 public class ClockPane extends Pane {
 	private int hour;
 	private int minute;
 	private int second;
   
+	private int hourStart;
+	private int minuteStart;
+	private int secondStart;
 	/** Construct a default clock with the current time*/
 	public ClockPane() {
 		setCurrentTime();
@@ -77,26 +81,6 @@ public class ClockPane extends Pane {
 		double centerY = getHeight() / 2 - 50;
 		double currentY = 0.0;
 		
-		// Label for time counter
-		Label timingLabel = new Label("      00 \" 00 \" 00");
-		timingLabel.setLayoutX( centerX / 2 );
-		timingLabel.setLayoutY( currentY = centerX + 130 );
-
-		// Draw buttons
-		Button btnSetAlarm = new Button();
-		btnSetAlarm.setText("Timing Begin");
-		btnSetAlarm.setLayoutX( centerX / 2 );
-		btnSetAlarm.setLayoutY( currentY = currentY + 30 );
-		btnSetAlarm.setStyle("-fx-font: 16 arial; -fx-base: #b6e7c9;");
-		btnSetAlarm.setPrefWidth( centerX );
-		
-		Button btnClearAlarm = new Button();
-		btnClearAlarm.setText("Timing End");
-		btnClearAlarm.setLayoutX( centerX / 2 );
-		btnClearAlarm.setLayoutY( currentY = currentY + 40 );
-		btnClearAlarm.setStyle("-fx-font: 16 arial; -fx-base: #FF8888;");
-		btnClearAlarm.setPrefWidth( centerX );
-		
 		// Draw circle
 		Circle circle = new Circle(centerX, centerY, clockRadius);
 		circle.setFill(Color.WHITE);
@@ -127,7 +111,7 @@ public class ClockPane extends Pane {
 		Line hLine = new Line(centerX, centerY, hourX, hourY);
 		hLine.setStroke(Color.GREEN);
 		getChildren().clear();  
-		getChildren().addAll(timingLabel,btnSetAlarm,btnClearAlarm,circle, t1, t2, t3, t4, sLine, mLine, hLine);
+		getChildren().addAll(circle, t1, t2, t3, t4, sLine, mLine, hLine);
 	}
   
 	@Override
